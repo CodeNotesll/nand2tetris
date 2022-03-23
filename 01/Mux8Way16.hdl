@@ -1,0 +1,209 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux8Way16.hdl
+/**
+ * 8-way 16-bit multiplexor:
+ * out = a if sel == 000
+ *       b if sel == 001
+ *       etc.
+ *       h if sel == 111
+ */
+CHIP Mux8Way16 {
+    IN a[16], b[16], c[16], d[16],
+       e[16], f[16], g[16], h[16],
+       sel[3];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    // selector
+    Not(in= sel[2], out= notsel2);
+    Not(in= sel[1], out= notsel1);
+    Not(in= sel[0], out= notsel0);
+    And3Way(a= notsel2, b= notsel1, c= notsel0, out= sela);
+    And3Way(a= notsel2, b= notsel1, c= sel[0], out= selb);
+    And3Way(a= notsel2, b= sel[1], c= notsel0, out= selc);
+    And3Way(a= notsel2, b= sel[1], c= sel[0], out= seld);
+    And3Way(a= sel[2], b= notsel1, c= notsel0, out= sele);
+    And3Way(a= sel[2], b= notsel1, c= sel[0], out= self);
+    And3Way(a= sel[2], b= sel[1], c= notsel0, out= selg);
+    And3Way(a= sel[2], b= sel[1], c= sel[0], out= selh);
+    // out[0]  8 Ands & 1 Or8way
+    And(a= a[0], b= sela, out= sa0);
+    And(a= b[0], b= selb, out= sb0);
+    And(a= c[0], b= selc, out= sc0);
+    And(a= d[0], b= seld, out= sd0);
+    And(a= e[0], b= sele, out= se0);
+    And(a= f[0], b= self, out= sf0);
+    And(a= g[0], b= selg, out= sg0);
+    And(a= h[0], b= selh, out= sh0);
+    Or8Way(in[0]= sa0, in[1]= sb0, in[2]= sc0, in[3]= sd0, 
+           in[4]= se0, in[5]= sf0, in[6]= sg0, in[7]= sh0, out= out[0]);
+    // out[1]  8 Ands & 1 Or8way
+    And(a= a[1], b= sela, out= sa1);
+    And(a= b[1], b= selb, out= sb1);
+    And(a= c[1], b= selc, out= sc1);
+    And(a= d[1], b= seld, out= sd1);
+    And(a= e[1], b= sele, out= se1);
+    And(a= f[1], b= self, out= sf1);
+    And(a= g[1], b= selg, out= sg1);
+    And(a= h[1], b= selh, out= sh1);
+    Or8Way(in[0]= sa1, in[1]= sb1, in[2]= sc1, in[3]= sd1,      
+           in[4]= se1, in[5]= sf1, in[6]= sg1, in[7]= sh1, out= out[1]);
+    // out[2]  8 Ands & 1 Or8way
+    And(a= a[2], b= sela, out= sa2);
+    And(a= b[2], b= selb, out= sb2);
+    And(a= c[2], b= selc, out= sc2);
+    And(a= d[2], b= seld, out= sd2);
+    And(a= e[2], b= sele, out= se2);
+    And(a= f[2], b= self, out= sf2);
+    And(a= g[2], b= selg, out= sg2);
+    And(a= h[2], b= selh, out= sh2);
+    Or8Way(in[0]= sa2, in[1]= sb2, in[2]= sc2, in[3]= sd2,      
+           in[4]= se2, in[5]= sf2, in[6]= sg2, in[7]= sh2, out= out[2]);
+    // out[3]  8 Ands & 1 Or8way
+    And(a= a[3], b= sela, out= sa3);
+    And(a= b[3], b= selb, out= sb3);
+    And(a= c[3], b= selc, out= sc3);
+    And(a= d[3], b= seld, out= sd3);
+    And(a= e[3], b= sele, out= se3);
+    And(a= f[3], b= self, out= sf3);
+    And(a= g[3], b= selg, out= sg3);
+    And(a= h[3], b= selh, out= sh3);
+    Or8Way(in[0]= sa3, in[1]= sb3, in[2]= sc3, in[3]= sd3,      
+           in[4]= se3, in[5]= sf3, in[6]= sg3, in[7]= sh3, out= out[3]);
+   // out[4]  8 Ands & 1 Or8way
+    And(a= a[4], b= sela, out= sa4);
+    And(a= b[4], b= selb, out= sb4);
+    And(a= c[4], b= selc, out= sc4);
+    And(a= d[4], b= seld, out= sd4);
+    And(a= e[4], b= sele, out= se4);
+    And(a= f[4], b= self, out= sf4);
+    And(a= g[4], b= selg, out= sg4);
+    And(a= h[4], b= selh, out= sh4);
+    Or8Way(in[0]= sa4, in[1]= sb4, in[2]= sc4, in[3]= sd4,      
+           in[4]= se4, in[5]= sf4, in[6]= sg4, in[7]= sh4, out= out[4]);
+   // out[5]  8 Ands & 1 Or8way
+    And(a= a[5], b= sela, out= sa5);
+    And(a= b[5], b= selb, out= sb5);
+    And(a= c[5], b= selc, out= sc5);
+    And(a= d[5], b= seld, out= sd5);
+    And(a= e[5], b= sele, out= se5);
+    And(a= f[5], b= self, out= sf5);
+    And(a= g[5], b= selg, out= sg5);
+    And(a= h[5], b= selh, out= sh5);
+    Or8Way(in[0]= sa5, in[1]= sb5, in[2]= sc5, in[3]= sd5,      
+           in[4]= se5, in[5]= sf5, in[6]= sg5, in[7]= sh5, out= out[5]);
+   // out[6]  8 Ands & 1 Or8way
+    And(a= a[6], b= sela, out= sa6);
+    And(a= b[6], b= selb, out= sb6);
+    And(a= c[6], b= selc, out= sc6);
+    And(a= d[6], b= seld, out= sd6);
+    And(a= e[6], b= sele, out= se6);
+    And(a= f[6], b= self, out= sf6);
+    And(a= g[6], b= selg, out= sg6);
+    And(a= h[6], b= selh, out= sh6);
+    Or8Way(in[0]= sa6, in[1]= sb6, in[2]= sc6, in[3]= sd6,      
+           in[4]= se6, in[5]= sf6, in[6]= sg6, in[7]= sh6, out= out[6]);
+   // out[7]  8 Ands & 1 Or8way
+    And(a= a[7], b= sela, out= sa7);
+    And(a= b[7], b= selb, out= sb7);
+    And(a= c[7], b= selc, out= sc7);
+    And(a= d[7], b= seld, out= sd7);
+    And(a= e[7], b= sele, out= se7);
+    And(a= f[7], b= self, out= sf7);
+    And(a= g[7], b= selg, out= sg7);
+    And(a= h[7], b= selh, out= sh7);
+    Or8Way(in[0]= sa7, in[1]= sb7, in[2]= sc7, in[3]= sd7,      
+           in[4]= se7, in[5]= sf7, in[6]= sg7, in[7]= sh7, out= out[7]);
+   // out[8]  8 Ands & 1 Or8way
+    And(a= a[8], b= sela, out= sa8);
+    And(a= b[8], b= selb, out= sb8);
+    And(a= c[8], b= selc, out= sc8);
+    And(a= d[8], b= seld, out= sd8);
+    And(a= e[8], b= sele, out= se8);
+    And(a= f[8], b= self, out= sf8);
+    And(a= g[8], b= selg, out= sg8);
+    And(a= h[8], b= selh, out= sh8);
+    Or8Way(in[0]= sa8, in[1]= sb8, in[2]= sc8, in[3]= sd8,      
+           in[4]= se8, in[5]= sf8, in[6]= sg8, in[7]= sh8, out= out[8]);
+    // out[9]  8 Ands & 1 Or8way
+    And(a= a[9], b= sela, out= sa9);
+    And(a= b[9], b= selb, out= sb9);
+    And(a= c[9], b= selc, out= sc9);
+    And(a= d[9], b= seld, out= sd9);
+    And(a= e[9], b= sele, out= se9);
+    And(a= f[9], b= self, out= sf9);
+    And(a= g[9], b= selg, out= sg9);
+    And(a= h[9], b= selh, out= sh9);
+    Or8Way(in[0]= sa9, in[1]= sb9, in[2]= sc9, in[3]= sd9,      
+           in[4]= se9, in[5]= sf9, in[6]= sg9, in[7]= sh9, out= out[9]);
+    // out[10]  8 Ands & 1 Or8way
+    And(a= a[10], b= sela, out= sa10);
+    And(a= b[10], b= selb, out= sb10);
+    And(a= c[10], b= selc, out= sc10);
+    And(a= d[10], b= seld, out= sd10);
+    And(a= e[10], b= sele, out= se10);
+    And(a= f[10], b= self, out= sf10);
+    And(a= g[10], b= selg, out= sg10);
+    And(a= h[10], b= selh, out= sh10);
+    Or8Way(in[0]= sa10, in[1]= sb10, in[2]= sc10, in[3]= sd10,      
+           in[4]= se10, in[5]= sf10, in[6]= sg10, in[7]= sh10, out= out[10]);
+   // out[11]  8 Ands & 1 Or8way
+    And(a= a[11], b= sela, out= sa11);
+    And(a= b[11], b= selb, out= sb11);
+    And(a= c[11], b= selc, out= sc11);
+    And(a= d[11], b= seld, out= sd11);
+    And(a= e[11], b= sele, out= se11);
+    And(a= f[11], b= self, out= sf11);
+    And(a= g[11], b= selg, out= sg11);
+    And(a= h[11], b= selh, out= sh11);
+    Or8Way(in[0]= sa11, in[1]= sb11, in[2]= sc11, in[3]= sd11,
+           in[4]= se11, in[5]= sf11, in[6]= sg11, in[7]= sh11, out= out[11]);
+   // out[12]  8 Ands & 1 Or8way
+    And(a= a[12], b= sela, out= sa12);
+    And(a= b[12], b= selb, out= sb12);
+    And(a= c[12], b= selc, out= sc12);
+    And(a= d[12], b= seld, out= sd12);
+    And(a= e[12], b= sele, out= se12);
+    And(a= f[12], b= self, out= sf12);
+    And(a= g[12], b= selg, out= sg12);
+    And(a= h[12], b= selh, out= sh12);
+    Or8Way(in[0]= sa12, in[1]= sb12, in[2]= sc12, in[3]= sd12,
+           in[4]= se12, in[5]= sf12, in[6]= sg12, in[7]= sh12, out= out[12]);
+    // out[13]  8 Ands & 1 Or8way
+    And(a= a[13], b= sela, out= sa13);
+    And(a= b[13], b= selb, out= sb13);
+    And(a= c[13], b= selc, out= sc13);
+    And(a= d[13], b= seld, out= sd13);
+    And(a= e[13], b= sele, out= se13);
+    And(a= f[13], b= self, out= sf13);
+    And(a= g[13], b= selg, out= sg13);
+    And(a= h[13], b= selh, out= sh13);
+    Or8Way(in[0]= sa13, in[1]= sb13, in[2]= sc13, in[3]= sd13,
+           in[4]= se13, in[5]= sf13, in[6]= sg13, in[7]= sh13, out= out[13]);
+    // out[14]  8 Ands & 1 Or8way
+    And(a= a[14], b= sela, out= sa14);
+    And(a= b[14], b= selb, out= sb14);
+    And(a= c[14], b= selc, out= sc14);
+    And(a= d[14], b= seld, out= sd14);
+    And(a= e[14], b= sele, out= se14);
+    And(a= f[14], b= self, out= sf14);
+    And(a= g[14], b= selg, out= sg14);
+    And(a= h[14], b= selh, out= sh14);
+    Or8Way(in[0]= sa14, in[1]= sb14, in[2]= sc14, in[3]= sd14,
+           in[4]= se14, in[5]= sf14, in[6]= sg14, in[7]= sh14, out= out[14]);
+   // out[15]  8 Ands & 1 Or8way
+    And(a= a[15], b= sela, out= sa15);
+    And(a= b[15], b= selb, out= sb15);
+    And(a= c[15], b= selc, out= sc15);
+    And(a= d[15], b= seld, out= sd15);
+    And(a= e[15], b= sele, out= se15);
+    And(a= f[15], b= self, out= sf15);
+    And(a= g[15], b= selg, out= sg15);
+    And(a= h[15], b= selh, out= sh15);
+    Or8Way(in[0]= sa15, in[1]= sb15, in[2]= sc15, in[3]= sd15,
+           in[4]= se15, in[5]= sf15, in[6]= sg15, in[7]= sh15, out= out[15]);
+}
+

@@ -1,0 +1,157 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux4Way16.hdl
+
+/**
+ * 4-way 16-bit multiplexor:
+ * out = a if sel == 00
+ *       b if sel == 01
+ *       c if sel == 10
+ *       d if sel == 11
+ */
+
+CHIP Mux4Way16 {
+    IN a[16], b[16], c[16], d[16], sel[2];
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    // selector
+    Not(in= sel[1], out= notsel1);
+    Not(in= sel[0], out= notsel0);
+    And(a= notsel1, b= notsel0, out= sela);
+    And(a= notsel1, b= sel[0], out= selb);
+    And(a= sel[1], b= notsel0, out= selc);
+    And(a= sel[1], b= sel[0], out= seld);
+    // out[0]
+    And(a= a[0], b= sela, out= sa0);
+    And(a= b[0], b= selb, out= sb0);
+    And(a= c[0], b= selc, out= sc0);
+    And(a= d[0], b= seld, out= sd0);
+    Or(a= sa0, b= sb0, out= o01);
+    Or(a= sc0, b= sd0, out= o02);
+    Or(a= o01, b= o02, out= out[0]);
+    //out[1]
+    And(a= a[1], b= sela, out= sa1);
+    And(a= b[1], b= selb, out= sb1);
+    And(a= c[1], b= selc, out= sc1);
+    And(a= d[1], b= seld, out= sd1);
+    Or(a= sa1, b= sb1, out= o11);
+    Or(a= sc1, b= sd1, out= o12);
+    Or(a= o11, b= o12, out= out[1]);
+    //out[2]
+    And(a= a[2], b= sela, out= sa2);
+    And(a= b[2], b= selb, out= sb2);
+    And(a= c[2], b= selc, out= sc2);
+    And(a= d[2], b= seld, out= sd2);
+    Or(a= sa2, b= sb2, out= o21);
+    Or(a= sc2, b= sd2, out= o22);
+    Or(a= o21, b= o22, out= out[2]);
+    //out[3]
+    And(a= a[3], b= sela, out= sa3);
+    And(a= b[3], b= selb, out= sb3);
+    And(a= c[3], b= selc, out= sc3);
+    And(a= d[3], b= seld, out= sd3);
+    Or(a= sa3, b= sb3, out= o31);
+    Or(a= sc3, b= sd3, out= o32);
+    Or(a= o31, b= o32, out= out[3]);
+    //out[4]
+    And(a= a[4], b= sela, out= sa4);
+    And(a= b[4], b= selb, out= sb4);
+    And(a= c[4], b= selc, out= sc4);
+    And(a= d[4], b= seld, out= sd4);
+    Or(a= sa4, b= sb4, out= o41);
+    Or(a= sc4, b= sd4, out= o42);
+    Or(a= o41, b= o42, out= out[4]);
+    //out[5]
+    And(a= a[5], b= sela, out= sa5);
+    And(a= b[5], b= selb, out= sb5);
+    And(a= c[5], b= selc, out= sc5);
+    And(a= d[5], b= seld, out= sd5);
+    Or(a= sa5, b= sb5, out= o51);
+    Or(a= sc5, b= sd5, out= o52);
+    Or(a= o51, b= o52, out= out[5]);
+    //out[6]
+    And(a= a[6], b= sela, out= sa6);
+    And(a= b[6], b= selb, out= sb6);
+    And(a= c[6], b= selc, out= sc6);
+    And(a= d[6], b= seld, out= sd6);
+    Or(a= sa6, b= sb6, out= o61);
+    Or(a= sc6, b= sd6, out= o62);
+    Or(a= o61, b= o62, out= out[6]);
+    //out[7]
+    And(a= a[7], b= sela, out= sa7);
+    And(a= b[7], b= selb, out= sb7);
+    And(a= c[7], b= selc, out= sc7);
+    And(a= d[7], b= seld, out= sd7);
+    Or(a= sa7, b= sb7, out= o71);
+    Or(a= sc7, b= sd7, out= o72);
+    Or(a= o71, b= o72, out= out[7]);
+    //out[8]
+    And(a= a[8], b= sela, out= sa8);
+    And(a= b[8], b= selb, out= sb8);
+    And(a= c[8], b= selc, out= sc8);
+    And(a= d[8], b= seld, out= sd8);
+    Or(a= sa8, b= sb8, out= o81);
+    Or(a= sc8, b= sd8, out= o82);
+    Or(a= o81, b= o82, out= out[8]);
+    //out[9]
+    And(a= a[9], b= sela, out= sa9);
+    And(a= b[9], b= selb, out= sb9);
+    And(a= c[9], b= selc, out= sc9);
+    And(a= d[9], b= seld, out= sd9);
+    Or(a= sa9, b= sb9, out= o91);
+    Or(a= sc9, b= sd9, out= o92);
+    Or(a= o91, b= o92, out= out[9]);
+    //out[10]
+    And(a= a[10], b= sela, out= sa10);
+    And(a= b[10], b= selb, out= sb10);
+    And(a= c[10], b= selc, out= sc10);
+    And(a= d[10], b= seld, out= sd10);
+    Or(a= sa10, b= sb10, out= o101);
+    Or(a= sc10, b= sd10, out= o102);
+    Or(a= o101, b= o102, out= out[10]);
+    //out[11]
+    And(a= a[11], b= sela, out= sa11);
+    And(a= b[11], b= selb, out= sb11);
+    And(a= c[11], b= selc, out= sc11);
+    And(a= d[11], b= seld, out= sd11);
+    Or(a= sa11, b= sb11, out= o111);
+    Or(a= sc11, b= sd11, out= o112);
+    Or(a= o111, b= o112, out= out[11]);
+    //out[12]
+    And(a= a[12], b= sela, out= sa12);
+    And(a= b[12], b= selb, out= sb12);
+    And(a= c[12], b= selc, out= sc12);
+    And(a= d[12], b= seld, out= sd12);
+    Or(a= sa12, b= sb12, out= o121);
+    Or(a= sc12, b= sd12, out= o122);
+    Or(a= o121, b= o122, out= out[12]);
+    //out[13]
+    And(a= a[13], b= sela, out= sa13);
+    And(a= b[13], b= selb, out= sb13);
+    And(a= c[13], b= selc, out= sc13);
+    And(a= d[13], b= seld, out= sd13);
+    Or(a= sa13, b= sb13, out= o131);
+    Or(a= sc13, b= sd13, out= o132);
+    Or(a= o131, b= o132, out= out[13]);
+    //out[14]
+    And(a= a[14], b= sela, out= sa14);
+    And(a= b[14], b= selb, out= sb14);
+    And(a= c[14], b= selc, out= sc14);
+    And(a= d[14], b= seld, out= sd14);
+    Or(a= sa14, b= sb14, out= o141);
+    Or(a= sc14, b= sd14, out= o142);
+    Or(a= o141, b= o142, out= out[14]);
+    //out[15]
+    And(a= a[15], b= sela, out= sa15);
+    And(a= b[15], b= selb, out= sb15);
+    And(a= c[15], b= selc, out= sc15);
+    And(a= d[15], b= seld, out= sd15);
+    Or(a= sa15, b= sb15, out= o151);
+    Or(a= sc15, b= sd15, out= o152);
+    Or(a= o151, b= o152, out= out[15]);
+}
+
+

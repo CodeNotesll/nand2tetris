@@ -1,0 +1,12 @@
+/** 
+ * And3Way:
+ * out = 1 if 6 inputs are 1
+ */
+CHIP And6Way {
+   IN a, b, c,d ,e,f;
+   OUT out;
+   PARTS:
+   And3Way(a= a, b= b,c= c, out= andabc);
+   And3Way(a= d, b= e, c= f, out= anddef);
+   And(a= andabc, b= anddef, out= out);
+}
