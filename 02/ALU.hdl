@@ -55,8 +55,8 @@ CHIP ALU {
    Not16(in= fout, out= notf);
    Mux16(a= fout, b= notf, sel= no, out[15]= msb, out[0..7]= temp1, out[8..15]= temp2, out= out);
    And(a= true, b= msb, out= ng);   // 最高位和1相与产生符号标志
-   Or8Way(in= temp1, out= orm);    /
-   Or8Way(in= temp2, out= orl);
-   Or(a= orm, b= orl, out= or16);    // 结果16位的或结果 out中有一位为1结果为1， 否则为0
-   Xor(a= or16, b= true, out= zr);   // 和1进行异或 相同为0（out不是0）否则为1（out是0）
+   Or8Way(in= temp1, out= or1);    
+   Or8Way(in= temp2, out= or2);
+   Or(a= or1, b= or2, out= or3);    // 结果16位的或结果 out中有一位为1结果为1， 否则为0
+   Xor(a= or3, b= true, out= zr);   // 和1进行异或 相同为0（out不是0）否则为1（out是0）
 }
