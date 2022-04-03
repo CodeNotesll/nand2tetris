@@ -28,6 +28,10 @@
     M=M+1
   @LOOP
     0;JMP
-END
+(END)
+  @sum
+    D=M
+  @R1
+    M=D
   @END
     0;JMP
