@@ -15,19 +15,19 @@
 (LOOP)
   @8192  // number of word on screen
     D=A
-  @n
+  @n   // RAM16
     M=D
-  @i
+  @i  // RAM17
     M=0  // number of word blackend
   @SCREEN
     D=A
-  @addr
+  @addr  // RAM18
     M=D   // base addr
   @KBD
     D=M // listen to keyboard input
   @BLACK
     D;JGT
-  (LOOPscreen)
+  (LOOPONE)
     @i
       D=M
     @n
@@ -41,11 +41,11 @@
       M=0
     @i
       M=M+1  // i = i + 1
-    @LOOPscreen
+    @LOOPONE
       0;JMP   // go back to black the screen
 
   (BLACK)
-    (LOOPscreen)
+    (LOOPTWO)
       @i
         D=M
       @n
@@ -59,7 +59,7 @@
         M=-1
       @i
         M=M+1  // i = i + 1
-    @LOOPscreen
-      0;JMP   // go back to black the screen
-@LOOP
+      @LOOPTWO
+        0;JMP   // go back to black the screen
+  @LOOP
     0; JMP // infinite loop
